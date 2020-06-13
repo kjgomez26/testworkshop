@@ -51,6 +51,31 @@ public class Triangle {
 			return "Not a Triangle";
 		}
 	}
+	
+	
+	public static boolean Verificate_Number(String value,String side,Triangle triangle) {
+		if(isNumeric(value)) {
+			if(side.contains("a")) {
+				triangle.setA(Integer.parseInt(value));
+			}else if(side.contains("b")) {
+				triangle.setB(Integer.parseInt(value));
+			}else {
+				triangle.setC(Integer.parseInt(value));
+			}
+			
+			return true;
+		}else {
+			if(side.contains("a")) {
+				triangle.setA(0);
+			}else if(side.contains("b")) {
+				triangle.setB(0);
+			}else {
+				triangle.setC(0);
+			}
+			System.out.println("Non numeral values are invalid ");
+		}
+		return false;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String a, b,c;
@@ -62,15 +87,17 @@ public class Triangle {
 		do {
 			System.out.println("Enter 3 integers which are sides of a triangle");
 			System.out.print("a: ");
-			triangle.setA( reader.nextInt());
-			
+			a = reader.nextLine();
 			System.out.print("b: ");
-			triangle.setB(reader.nextInt());
+			b = reader.nextLine();
 			System.out.print("c: ");
-			triangle.setC(reader.nextInt());
-
-			triangle.setC2(false);
-		} while ((!triangle.Verificate_range()&&inputelement));
+			c = reader.nextLine();
+			inputelement=Verificate_Number(a,"a", triangle);
+			inputelement=Verificate_Number(b,"b", triangle);
+			inputelement=Verificate_Number(c,"c", triangle);
+			
+			
+		} while (!(triangle.Verificate_range()&&inputelement));
 
 		reader.close();
 
