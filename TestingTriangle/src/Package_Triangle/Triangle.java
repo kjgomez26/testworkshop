@@ -8,9 +8,9 @@ public class Triangle {
 	private boolean c1, c2, c3, isTriangle;
 	
 	public boolean Verificate_range(){
-		setC1((1 <= a) && (a <= 200));
-		setC2((1 <= b) && (b <= 200));
-		setC3((1 <= c) && (c <= 200));
+		setC1((1 <= getA()) && (getA() <= 200));
+		setC2((1 <= getB()) && (getB() <= 200));
+		setC3((1 <= getC()) && (getC() <= 200));
 		
 		if (!isC1()) {
 			System.out.println("Value of a is not in the range of permitted values");
@@ -28,47 +28,49 @@ public class Triangle {
 	}
 	
 	public void Verificate_triangle() {
-		if ((getA() < b + getC()) && (b < getA() + getC()) && (getC() < getA() + b)) {
+		if ((getA() < getB() + getC()) && (getB()< getA() + getC()) && (getC() < getA() + getB())) {
 			setTriangle(true);
 		} else {
 			setTriangle(false);
 		}
 	}
 	
-	public void Determinate_Triangle() {
+	public String Determinate_Triangle() {
 		if (isTriangle()) {
-			if ((getA() == b) && (b == getC())) {
-				System.out.println("Equilateral");
+			if ((getA() == getB()) && (getB() == getC())) {
+				return "Equilateral";
 			}
-			else if ((getA() != b) && (getA() != getC()) && (b != getC())) {
-				System.out.println("Scalene");
+			else if ((getA() != getB()) && (getA() != getC()) && (getB() != getC())) {
+				return "Scalene";
 			} 
 			else {
-				System.out.println("Isosceles");
+				return "Isosceles";
 			}
 		} 
 		else {
-			System.out.println("Not a Triangle");
+			return "Not a Triangle";
 		}
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String a, b,c;
 		Triangle triangle=new Triangle();
-
+		boolean inputelement=true;
 		Scanner reader = new Scanner(System.in);
 
 //		Step 1: Get Input
 		do {
 			System.out.println("Enter 3 integers which are sides of a triangle");
 			System.out.print("a: ");
-			triangle.setA(reader.nextInt());
+			triangle.setA( reader.nextInt());
+			
 			System.out.print("b: ");
 			triangle.setB(reader.nextInt());
 			System.out.print("c: ");
 			triangle.setC(reader.nextInt());
 
 			triangle.setC2(false);
-		} while (!triangle.Verificate_range());
+		} while ((!triangle.Verificate_range()&&inputelement));
 
 		reader.close();
 
@@ -76,7 +78,7 @@ public class Triangle {
 		triangle.Verificate_triangle();
 
 //		Step 3: Determine Triangle Type
-		triangle.Determinate_Triangle();
+		System.out.print(triangle.Determinate_Triangle());
 
 	}
 	public int getA() {
@@ -122,5 +124,14 @@ public class Triangle {
 		this.isTriangle = isTriangle;
 	}
 	
-
+	
+	private static boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
+	}
 }
+
